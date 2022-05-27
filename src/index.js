@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
+import { createStore } from 'redux'
 import App from './components/App';
+import movies from './Reducer';
+const Store = createStore(movies)
+console.log(Store);
+console.log("getStore",Store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
