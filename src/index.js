@@ -3,18 +3,14 @@ import ReactDOM from 'react-dom/client';
 import { createStore } from 'redux'
 import App from './components/App';
 import movies from './Reducer';
-const Store = createStore(movies)
-console.log(Store);
-console.log("getStore",Store.getState());
-Store.dispatch({
-  type: "ADD_MOVIES",
-  movies:[{namemovvie : "SIpderman"}]
-})
-console.log("after state",Store.getState());
+const store = createStore(movies)
+console.log(store);
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App store={store} />
   </React.StrictMode>
 );
 
