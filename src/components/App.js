@@ -1,6 +1,7 @@
 
 import Navbar from "./Navbar";
 import {data} from "./data";
+import { addmovies } from "../Actions";
 import Movietracker from "./Movietracker"
 import "../index.css"
 import React from "react";
@@ -15,10 +16,7 @@ class App extends React.Component {
       console.log("updated!!");
       this.forceUpdate();
     }
-    store.dispatch({
-      type: "ADD_MOVIES",
-      movies:data
-    })
+    store.dispatch(addmovies(data))
     console.log("after state",store.getState());
     
   }
