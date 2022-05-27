@@ -1,17 +1,27 @@
 
-
+import Navbar from "./Navbar";
+import {data} from "./data";
+import Movietracker from "./Movietracker"
+import "../index.css"
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        
-      </header>
+      <Navbar />
+      <div className="main">
+        <div className="tabs">
+          <div className="tab"> Movies</div>
+          <div className="tab"> Favourites </div>
+        </div>
+        <div className="Movies-list">
+            {data.map((movie) => (
+              <Movietracker movie = {movie}  />
+            ))}
+        </div>
+      </div>
     </div>
+
   );
 }
 
 export default App;
+
