@@ -11,6 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.active-tabs {
+  background-color: rgb(100, 100, 199) !important;
+  color: white !important;
+}
+.No-movies{
+  margin-top: 10px;
+}
 .main {
   width: 70%;
   display: flex;
@@ -32,9 +39,9 @@ code {
   border-radius: 3px;
   background-color: #fff;
 }
-.main .tabs tab:hover {
+.main .tabs .tab:hover {
   cursor: pointer;
-  background-color: e1e1e1;
+  background-color: #e1e1e1
 }
 
 .Movies-list {
@@ -109,4 +116,8 @@ code {
 .movie-rating .ratings {
   font-size: 20px;
   font-weight: 600;
+}
+.unfavBtn{
+  background-color:rgb(194, 65, 18);
+  color: #fff;
 }
