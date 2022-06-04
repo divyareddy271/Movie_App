@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { createStore } from 'redux';
 
 import App from './components/App';
-import movies from './Reducer';
+import RootReducer from './Reducer';
 
-const store = createStore(movies);
+const store = createStore(RootReducer);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

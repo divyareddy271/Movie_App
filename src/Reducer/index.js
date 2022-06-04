@@ -5,9 +5,18 @@ const initialmoviestate = {
     favourite: [],
     showfavourite: false,
 }
+const initialsearchstate = {
+    search : {},
+}
 
-export default function movies (state = initialmoviestate, action) {
-    
+const initialrootstate = {
+   movies: initialmoviestate,
+   search: initialsearchstate,
+}
+
+
+export  function movies (state = initialmoviestate, action) {
+    console.log("Movies Rendered")
     switch(action.type) {
 
         case ADD_MOVIES :
@@ -37,6 +46,18 @@ export default function movies (state = initialmoviestate, action) {
         default :
         return state;
 
+    }
+    
+}
+export function search (state = initialsearchstate, action) {
+    console.log("Search Rendered")
+    return state
+    
+}
+export default function RootReducer(state = initialrootstate,action){
+    return{
+        movies : movies(state.movies,action),
+        search : search(state.search,action),
     }
     
 }
