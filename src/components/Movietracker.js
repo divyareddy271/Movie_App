@@ -26,7 +26,7 @@ class Movietracker extends React.Component{
             <div className="description">{movie.Plot} </div>
             <div className="movie-rating">
               <div className="ratings">{movie.imdbRating} </div>
-              <div> Hello{this.props.ismoviefavourite}</div>
+              <div> {this.props.ismoviefavourite}</div>
               {this.props.ismoviefavourite?
               <button className="unfavBtn" onClick={this.handle_remove_fav}>Unfavourites</button>
               :
