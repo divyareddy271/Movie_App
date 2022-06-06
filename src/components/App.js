@@ -5,6 +5,7 @@ import { addmovies, setshowfavourite } from "../Actions";
 import Movietracker from "./Movietracker"
 import "../index.css"
 import React from "react";
+import { StoreContext } from "..";
 import { render } from "@testing-library/react";
 class App extends React.Component {
   
@@ -27,7 +28,7 @@ class App extends React.Component {
       return false;
     }
     else{
-      console.log("index",movie, "  ",index);
+  //    console.log("index",movie, "  ",index);
       return true;
     }
   }
@@ -36,14 +37,17 @@ class App extends React.Component {
     store.dispatch(setshowfavourite(val));
   }
   render(){
-    const {movies} = this.props.store.getState();
+    const {movies,search} = this.props.store.getState();
     const {list,favourite, showfavourite} = movies;
     const displaymovies =  showfavourite ? favourite : list;
-    console.log("getstate",this.props.store.getState(),list);
+    console.log("getstate",this.props.store.getState());
     console.log("rendered");
+    
     return (
-      <div className="App">
-        <Navbar />
+      <StoreContext.Consumer> 
+        { (store) => {
+        return (<div className="App">
+        <Navbar dispatch = {store.dispatch} search = {search}/>
         <div className="main">
           <div className="tabs">
             <div className={`tab ${showfavourite ? '': 'active-tabs'}`} onClick={() => this.onchangetab(false)}> Movies</div>
@@ -53,8 +57,8 @@ class App extends React.Component {
               {displaymovies.map((movie,index) => (
                 <Movietracker movie = {movie} 
                 key = {`movie-${index}`}
-                dispatch = {this.props.store.dispatch}
-                store = {this.props.store}
+                dispatch = {store.dispatch}
+                store = {store}
                 ismoviefavourite = {this.isFavourite(movie)}/>
               ))}
               
@@ -63,7 +67,9 @@ class App extends React.Component {
             {showfavourite ? <div className="No-movies">No movies to display!!</div>: null}
           </div>
         </div>
-      </div>
+      </div>)}}
+      </StoreContext.Consumer>
+     
   
     );
   }
