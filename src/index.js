@@ -28,7 +28,40 @@ const thunk = ({dispatch,getState}) => (next) => (action) => {
   }
   next(action)
 }
-
+export function connect(callback) {
+  return function (Component) {
+    class ConnectedComponent extends React.Component {
+      constructor(props){
+        super(props);
+        this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
+      }
+      componentWillUnmount () {
+        this.unsubscribe();
+      }
+      render() {
+       
+          const {store} = this.props;
+          const state = store.getState();
+          const thisdatatobepassed = callback(state);
+          return (<Component {...thisdatatobepassed} dispatch = {store.dispatch}> </Component> );
+      
+      
+    }
+  }
+    class ConnectedComponentWrapper extends React.Component {
+      render() {
+           return (
+            <StoreContext.Consumer>
+            {(store) => (
+              <ConnectedComponent store = {store} ></ConnectedComponent>
+            )}
+          </StoreContext.Consumer>
+           )
+          }
+    }
+    return ConnectedComponentWrapper;
+  }
+}
 
 export const StoreContext = createContext();
 class Provider extends React.Component{
