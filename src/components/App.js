@@ -38,16 +38,13 @@ class App extends React.Component {
   }
   render(){
     const {movies,search} = this.props.store.getState();
-    const {list,favourite, showfavourite} = movies;
+    const {list, showfavourite = [], favourite = []} = movies;
     const displaymovies =  showfavourite ? favourite : list;
     console.log("getstate",this.props.store.getState());
     console.log("rendered");
-    
     return (
-      <StoreContext.Consumer> 
-        { (store) => {
-        return (<div className="App">
-        <Navbar dispatch = {store.dispatch} search = {search}/>
+      <div className="App">
+        <Navbar dispatch = {this.props.store.dispatch} search = {search}/>
         <div className="main">
           <div className="tabs">
             <div className={`tab ${showfavourite ? '': 'active-tabs'}`} onClick={() => this.onchangetab(false)}> Movies</div>
@@ -57,23 +54,33 @@ class App extends React.Component {
               {displaymovies.map((movie,index) => (
                 <Movietracker movie = {movie} 
                 key = {`movie-${index}`}
-                dispatch = {store.dispatch}
-                store = {store}
+                dispatch = {this.props.store.dispatch}
+                store = {this.props.store}
                 ismoviefavourite = {this.isFavourite(movie)}/>
               ))}
               
           </div>
           <div>
-            {showfavourite ? <div className="No-movies">No movies to display!!</div>: null}
+            {displaymovies.length === 0 ? <div className="No-movies">No movies to display!!</div>: null}
           </div>
         </div>
-      </div>)}}
-      </StoreContext.Consumer>
-     
+      </div>
   
     );
   }
 }
+// class AppWrapper extends React.Component {
+//   render() {
+//    return (
+//     <StoreContext.Consumer>
+//     {(store) => (
+//       <App store = {store} ></App>
+//     )}
+//   </StoreContext.Consumer>
+//    )
+//   }
+// }
+const connectedComponent = connect (callback)(App);
+export default connectedComponent;
 
-export default App;
 

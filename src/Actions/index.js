@@ -51,12 +51,7 @@ export const handleMovieSearch = (movie) => {
         fetch(url)
         .then(response => response.json())
         .then(movie => {console.log(movie)
-            if(Error){
-                console.log("errrr")
-
-            }
-            else
-          { dispatch(AddSEARCHMOVIE(movie))}
+            dispatch(AddSEARCHMOVIE(movie))
            //     type : "add_serach_results",
            //     movie
            // })
